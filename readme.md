@@ -25,7 +25,7 @@ Target collection (NCR & ADR) for Cyberpunk 2077:
    npm install discord.js axios dotenv
 
 ## .env files
-
+   ```bash
 NEXUS_API_KEY=your-nexus-api-key
 DISCORD_BOT_TOKEN=your-discord-bot-token
 APP_NAME=CollectionDiffBot
@@ -33,7 +33,7 @@ APP_VERSION=1.0.0
 
 
 ## Run 
-
+   ```bash
 node ncr_diff.js
 
 ## Usage
