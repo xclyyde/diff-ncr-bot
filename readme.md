@@ -21,26 +21,26 @@ Target collection (NCR & ADR) for Cyberpunk 2077:
 
 1. **Clone or create the project folder** and place the bot script inside (e.g. `discord_bot_best_practices.js`).
 2. **Install dependencies**:
-   ```bash
+   ```
    npm install discord.js axios dotenv
-
+   ```
 ## .env files
-   ```bash
+   ```
 NEXUS_API_KEY=your-nexus-api-key
 DISCORD_BOT_TOKEN=your-discord-bot-token
 APP_NAME=CollectionDiffBot
 APP_VERSION=1.0.0
-
+   ```
 
 ## Run 
-   ```bash
+   ```
 node ncr_diff.js
-
+   ```
 ## Usage
-   ```bash
+   ```
 !diff rcupp <revisionA> <revisionB> for NRC
 !diff srpv39 <revisionA> <revisionB> for ADR
 !diff vfy7w1 <revisionA> <revisionB> for NCR Lite 
 !diff ezxduq <revisionA> <revisionB> for ADR Lite
-
+   ```
 
