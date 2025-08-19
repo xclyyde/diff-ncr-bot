@@ -8,18 +8,6 @@ const APP_NAME = process.env.APP_NAME || 'CollectionDiffBot';
 const APP_VERSION = process.env.APP_VERSION || '1.0.0';
 const BOT_TOKEN = process.env.DISCORD_BOT_TOKEN;
 
-/**
- * Fetch the data for a specific revision of a collection from the Nexus Mods
- * API. This function constructs a GraphQL query and sends it via POST. If
- * adult content is present in the collection, we set `viewAdultContent` to
- * `true` so the API returns the data. Without this flag, the API would
- * respond with an `ADULT_CONTENT_BLOCKED` error for marked collections.
- *
- * @param {string} slug - The slug of the collection (e.g. 'rcuccp').
- * @param {number} revision - The revision number to retrieve.
- * @returns {Promise<Object>} - The revision data including a list of mod files.
- * @throws {Error} - If the API returns an error payload.
- */
 async function fetchRevision(slug, revision) {
   const query = `
     query Revision($slug: String!, $revision: Int) {
@@ -58,20 +46,6 @@ async function fetchRevision(slug, revision) {
   return response.data.data.collectionRevision;
 }
 
-/**
- * Compute differences between two arrays of mod definitions. Each mod is
- * expected to contain an `id`, `name` and `version`. The `id` is the
- * primary key and may correspond to the `modId` when available or fall back
- * to the `fileId` if the `mod` information is missing. The returned object
- * groups mods into three categories: added, removed and updated.
- *
- * @param {Array<{id: string|number, name: string, version: string}>} oldMods
- *   Mods present in the older revision.
- * @param {Array<{id: string|number, name: string, version: string}>} newMods
- *   Mods present in the newer revision.
- * @returns {Object} - An object with properties `added`, `removed`, and
- *   `updated`, each containing an array of mod objects or update pairs.
- */
 function computeDiff(oldMods, newMods) {
   // Convert arrays into maps keyed by ID for constant time lookups. The IDs
   // are cast to strings to ensure consistent key types in the Map.
@@ -104,16 +78,7 @@ function computeDiff(oldMods, newMods) {
   return { added, removed, updated };
 }
 
-/**
- * Send a potentially long message by splitting it into chunks that do not
- * exceed Discord's 2 000 character limit. While 2 000 is the absolute limit,
- * sending chunks of 1 900 characters leaves space for formatting and
- * ensures there is no accidental overflow. This helper function centralises
- * the logic for chunking and sending messages.
- *
- * @param {Channel} channel - The Discord channel to send the message to.
- * @param {string} content - The full content to send.
- */
+
 async function sendLongMessage(channel, content) {
   // Match any characters including newlines into segments up to 1 900 chars.
   const chunks = content.match(/[\s\S]{1,1900}/g) || [];
