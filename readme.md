@@ -15,9 +15,6 @@ Target collection (NCR & ADR) for Cyberpunk 2077:
 - **Node.js** v18+ (tested with Node 22)
 - A **Discord bot** (token from the [Discord Developer Portal](https://discord.com/developers/applications))
 - A **Nexus Mods API key** (from your Nexus Mods account)
-
-> Make sure your bot has permission to read and send messages in your test server.
-
 ---
 
 ## Setup
@@ -40,7 +37,7 @@ APP_VERSION=1.0.0
 node ncr_diff.js
 
 ## Usage
-
+   ```bash
 !diff rcupp <revisionA> <revisionB> for NRC
 !diff srpv39 <revisionA> <revisionB> for ADR
 !diff vfy7w1 <revisionA> <revisionB> for NCR Lite 
